@@ -14,11 +14,11 @@ def part_one(file_path: str) -> int:
     # read file
     with open(file_path) as f:
         lines = f.readlines()
-    
-    col1 = sorted([int(l.split("   ")[0]) for l in lines])
-    col2 = sorted([int(l.split("   ")[1]) for l in lines])
 
-    return sum(map(lambda x: abs(x[0]-x[1]), zip(col1, col2)))
+    col1 = sorted([int(line.split("   ")[0]) for line in lines])
+    col2 = sorted([int(line.split("   ")[1]) for line in lines])
+
+    return sum(map(lambda x: abs(x[0] - x[1]), zip(col1, col2)))
 
 
 def part_two(file_path: str) -> int:
@@ -34,12 +34,11 @@ def part_two(file_path: str) -> int:
 
     with open(file_path) as f:
         lines = f.readlines()
-    
-    col1 = [int(l.split("   ")[0]) for l in lines]
-    col2_counter = Counter([int(l.split("   ")[1]) for l in lines])
 
-    return sum([x*col2_counter[x] for x in col1])
+    col1 = [int(line.split("   ")[0]) for line in lines]
+    col2_counter = Counter([int(line.split("   ")[1]) for line in lines])
 
+    return sum([x * col2_counter[x] for x in col1])
 
 
 if __name__ == "__main__":

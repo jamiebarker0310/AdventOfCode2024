@@ -1,10 +1,7 @@
 def calculate_safety(line: list[int]) -> bool:
-    diffs = [line[i] - line[i + 1] for i in range(len(line) - 1)]
+    diffs = set([line[i] - line[i + 1] for i in range(len(line) - 1)])
 
-    monotonous = all(map(lambda x: x > 0, diffs)) or all(map(lambda x: x < 0, diffs))
-    small = all(map(lambda x: abs(x) <= 3, diffs))
-
-    return monotonous and small
+    return diffs <= {1,2,3} or diffs <= {-1, -2, -3}
 
 
 def calculate_adjusted_safety(line: list[int]) -> bool:

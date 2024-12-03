@@ -1,7 +1,7 @@
 def calculate_safety(line: list[int]) -> bool:
     diffs = set([line[i] - line[i + 1] for i in range(len(line) - 1)])
 
-    return diffs <= {1,2,3} or diffs <= {-1, -2, -3}
+    return diffs <= {1, 2, 3} or diffs <= {-1, -2, -3}
 
 
 def calculate_adjusted_safety(line: list[int]) -> bool:

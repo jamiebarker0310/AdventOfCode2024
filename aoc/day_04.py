@@ -17,7 +17,7 @@ def part_one(file_path: str) -> int:
     chr_to_int = {char: n for n, char in enumerate("XMAS.")}
 
     count = 0
-    X = np.array([[chr_to_int[char] for char in l.strip()] for l in lines])
+    X = np.array([[chr_to_int[char] for char in line.strip()] for line in lines])
 
     for _ in range(4):
         for i in range(X.shape[0]):
@@ -50,7 +50,7 @@ def part_two(file_path: str) -> int:
     # chr_to_int = {char: n for n, char in enumerate("XMAS.")}
 
     count = 0
-    X = np.array([[char for char in l.strip()] for l in lines])
+    X = np.array([[char for char in line.strip()] for line in lines])
 
     for _ in range(4):
         for i in range(X.shape[0] - 2):

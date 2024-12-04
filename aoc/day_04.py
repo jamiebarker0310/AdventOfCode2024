@@ -1,6 +1,3 @@
-import numpy as np
-
-
 def part_one(file_path: str) -> int:
     """find all XMAS in any direction
     Args:
@@ -17,19 +14,19 @@ def part_one(file_path: str) -> int:
     chr_to_int = {char: n for n, char in enumerate("XMAS.")}
 
     count = 0
-    X = np.array([[chr_to_int[char] for char in line.strip()] for line in lines])
+    X = [[chr_to_int[char] for char in line.strip()] for line in lines]
 
     for _ in range(4):
-        for i in range(X.shape[0]):
-            for j in range(X.shape[1] - 3):
-                if (X[i, j : j + 4] == np.array([0, 1, 2, 3])).all():
+        for i in range(len(X)):
+            for j in range(len(X[0]) - 3):
+                if list(X[i][j : j + 4]) == [0, 1, 2, 3]:
                     count += 1
-        for i in range(X.shape[0] - 3):
-            for j in range(X.shape[1] - 3):
-                if (np.diag(X[i : i + 4, j : j + 4]) == np.array([0, 1, 2, 3])).all():
+        for i in range(len(X) - 3):
+            for j in range(len(X[0]) - 3):
+                if all([X[i + k][j + k] == k for k in range(4)]):
                     count += 1
 
-        X = np.rot90(X)
+        X = list(zip(*X[::-1]))
 
     return count
 
@@ -50,21 +47,21 @@ def part_two(file_path: str) -> int:
     # chr_to_int = {char: n for n, char in enumerate("XMAS.")}
 
     count = 0
-    X = np.array([[char for char in line.strip()] for line in lines])
+    X = [[char for char in line.strip()] for line in lines]
 
     for _ in range(4):
-        for i in range(X.shape[0] - 2):
-            for j in range(X.shape[1] - 2):
-                tl = X[i, j] == "M"
-                tr = X[i, j + 2] == "S"
-                bl = X[i + 2, j] == "M"
-                br = X[i + 2, j + 2] == "S"
-                c = X[i + 1, j + 1] == "A"
+        for i in range(len(X) - 2):
+            for j in range(len(X[0]) - 2):
+                tl = X[i][j] == "M"
+                tr = X[i][j + 2] == "S"
+                bl = X[i + 2][j] == "M"
+                br = X[i + 2][j + 2] == "S"
+                c = X[i + 1][j + 1] == "A"
 
                 if all([tl, tr, bl, br, c]):
                     count += 1
 
-        X = np.rot90(X)
+        X = list(zip(*X[::-1]))
 
     return count
 

@@ -10,6 +10,7 @@ def calculate_equations(start: int, remaining: list[int]) -> list[int]:
 
     return options
 
+
 def calculate_equations_two(start: int, remaining: list[int]) -> list[int]:
 
     options = []
@@ -18,15 +19,17 @@ def calculate_equations_two(start: int, remaining: list[int]) -> list[int]:
         return [
             start + remaining[0],
             start * remaining[0],
-            int("".join([str(start), str(remaining[0])]))
-            ]
+            int("".join([str(start), str(remaining[0])])),
+        ]
 
     options += calculate_equations_two(start + remaining[0], remaining[1:])
     options += calculate_equations_two(start * remaining[0], remaining[1:])
-    options += calculate_equations_two(int("".join([str(start), str(remaining[0])])), remaining[1:])
-
+    options += calculate_equations_two(
+        int("".join([str(start), str(remaining[0])])), remaining[1:]
+    )
 
     return options
+
 
 def part_one(file_path: str):
     """[summary]
@@ -62,7 +65,7 @@ def part_two(file_path: str):
         [type]: [description]
     """
 
-   # read file
+    # read file
     with open(file_path) as f:
         lines = f.readlines()
     total = 0

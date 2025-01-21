@@ -1,29 +1,30 @@
-from collections import Counter, defaultdict
+from collections import defaultdict
+
 
 def get_all_paths(file_path):
 
-     # read file
+    # read file
     with open(file_path) as f:
         lines = f.readlines()
     pos_to_height = {}
     for i, line in enumerate(lines[::-1]):
         for j, char in enumerate(line.strip()):
-            pos_to_height[j+i*1j] = int(char) if char.isdigit() else 100
-    
+            pos_to_height[j + i * 1j] = int(char) if char.isdigit() else 100
+
     nodes = defaultdict(list)
     for pos1, h1 in pos_to_height.items():
-        for diff in [1,-1,1j,-1j]:
-            if pos_to_height.get(pos1+diff) == h1+1:
-                nodes[pos1].append(pos1+diff)
-    
+        for diff in [1, -1, 1j, -1j]:
+            if pos_to_height.get(pos1 + diff) == h1 + 1:
+                nodes[pos1].append(pos1 + diff)
+
     paths = [[k] for k, v in pos_to_height.items() if v == 0]
-    for i in range(10-1):
+    for i in range(10 - 1):
         new_paths = []
         for path in paths:
             for next_step in nodes.get(path[-1], []):
-                new_paths.append(path+[next_step])
+                new_paths.append(path + [next_step])
         paths = new_paths
-    
+
     return paths
 
 

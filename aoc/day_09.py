@@ -1,5 +1,3 @@
-
-
 def part_one(file_path: str):
     """[summary]
 
@@ -82,13 +80,14 @@ def part_two(file_path: str):
     filled_gaps = []
 
     for file in files[::-1]:
-        fitted_gaps = list(filter(lambda x: filter_gap(file, x), gaps))
-        if fitted_gaps:
-            gap = fitted_gaps[0]
+        fitted_gaps = filter(lambda x: filter_gap(file, x), gaps)
+        try:
+            gap = next(fitted_gaps)
             file.start_point = gap.start_point
-
             gap.length -= file.length
             gap.start_point += file.length
+        except StopIteration:
+            pass
 
         filled_gaps.append(file)
 

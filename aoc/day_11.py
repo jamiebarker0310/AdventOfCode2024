@@ -7,9 +7,10 @@ def blink(stone: int) -> list[int]:
         return [1]
     len_st = len(str(stone))
     if len_st % 2 == 0:
-        return [int(str(stone)[:len_st//2]), int(str(stone)[len_st//2 :])]
+        return [int(str(stone)[: len_st // 2]), int(str(stone)[len_st // 2 :])]
     else:
-        return [stone*2024]
+        return [stone * 2024]
+
 
 def run_blinks(file_path, n=25):
 
@@ -23,7 +24,7 @@ def run_blinks(file_path, n=25):
         new_stones = Counter()
         for val, count in stones.items():
             new_counter = Counter(blink(val))
-            new_counter = Counter({k: v*count for k,v in new_counter.items()})
+            new_counter = Counter({k: v * count for k, v in new_counter.items()})
             new_stones += new_counter
         stones = new_stones
     return sum(stones.values())
@@ -51,9 +52,6 @@ def part_two(file_path: str):
     Returns:
         [type]: [description]
     """
-
-    with open(file_path) as f:
-        lines = f.readlines()
 
     return run_blinks(file_path, n=75)
 

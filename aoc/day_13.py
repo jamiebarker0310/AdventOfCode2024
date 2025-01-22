@@ -2,6 +2,16 @@ import re
 from math import isclose
 
 
+def is_int(x):
+
+    return isclose(x, round(x), rel_tol=0, abs_tol=1e-3)
+
+
+def valid_solution(na, nb):
+
+    return is_int(na) and is_int(nb) and min(na, nb) >= 0
+
+
 def part_one(file_path: str):
     """[summary]
 
@@ -34,11 +44,7 @@ def part_one(file_path: str):
         na = (yb * xp - xb * yp) * det
         nb = (xa * yp - ya * xp) * det
 
-        if (
-            isclose(na, round(na), rel_tol=1e-5)
-            and isclose(nb, round(nb), rel_tol=1e-5)
-            and min(na, nb) >= 0
-        ):
+        if valid_solution(na, nb):
             tokens += 3 * na
             tokens += nb
 
@@ -80,11 +86,7 @@ def part_two(file_path: str):
         na = (yb * xp - xb * yp) * det
         nb = (xa * yp - ya * xp) * det
 
-        if (
-            isclose(na, round(na), rel_tol=0, abs_tol=1e-3)
-            and isclose(nb, round(nb), rel_tol=0, abs_tol=1e-3)
-            and min(na, nb) >= 0
-        ):
+        if valid_solution(na, nb):
             tokens += 3 * na
             tokens += nb
 
